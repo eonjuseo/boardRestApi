@@ -38,4 +38,12 @@ public class BoardService {
         boardRepository.save(board);
     }
 
+    @Transactional
+    public void deleteBoard(long id) {
+//        Board board = boardRepository.findById(id)
+//                .orElseThrow(() -> new EntityNotFoundException("게시물을 불러올 수 없습니다."));
+
+        boardRepository.deleteById(id);
+
+    }
 }
