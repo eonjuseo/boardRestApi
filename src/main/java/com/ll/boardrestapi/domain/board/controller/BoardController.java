@@ -30,7 +30,14 @@ public class BoardController {
     public ResponseEntity<String> updateBoard(@PathVariable("id") long id,
                                               @RequestBody BoardRequest boardRequest) {
         boardService.updateBoard(id, boardRequest);
+
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteBoard(@PathVariable("id") long id) {
+        boardService.deleteBoard(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
