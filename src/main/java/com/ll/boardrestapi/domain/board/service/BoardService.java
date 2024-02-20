@@ -28,4 +28,14 @@ public class BoardService {
         boardRepository.save(board);
         return BoardResponse.of(board);
     }
+
+    @Transactional
+    public void updateBoard(long id, BoardRequest boardRequest) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("게시물을 불러올 수 없습니다."));
+
+        board.update(boardRequest);
+        boardRepository.save(board);
+    }
+
 }
