@@ -15,6 +15,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class BoardService {
     private final BoardRepository boardRepository;
 
+    public BoardResponse findById(Long id) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("게시물을 불러올 수 없습니다."));
+        return BoardResponse.of(board);
+    }
+
     @Transactional
     public BoardResponse createBoard(BoardRequest boardRequest) {
         Board board = BoardRequest.toEntity(boardRequest);
