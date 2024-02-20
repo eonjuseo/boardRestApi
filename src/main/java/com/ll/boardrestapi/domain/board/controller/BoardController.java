@@ -16,7 +16,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<BoardResponse> readBoard(@PathVariable long id) {
+    public ResponseEntity<BoardResponse> readBoard(@PathVariable("id") long id) {
         return new ResponseEntity<>(boardService.findById(id), HttpStatus.OK);
     }
 
@@ -25,4 +25,12 @@ public class BoardController {
 
         return new ResponseEntity<>(boardService.createBoard(boardRequest), HttpStatus.OK);
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<String> updateBoard(@PathVariable("id") long id,
+                                              @RequestBody BoardRequest boardRequest) {
+        boardService.updateBoard(id, boardRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }
