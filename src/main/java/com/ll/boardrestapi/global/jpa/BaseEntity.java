@@ -23,11 +23,11 @@ public class BaseEntity {
     @EqualsAndHashCode.Include
     private Long id;
 
-    @NotNull
-    @CreatedDate
-    private LocalDateTime createDate;
-
-    @NotNull
-    @LastModifiedDate
-    private LocalDateTime modifyDate;
+//    @NotNull
+//    @CreatedDate
+//    private LocalDateTime createDate;
+//
+//    @NotNull
+//    @LastModifiedDate
+//    private LocalDateTime modifyDate;
 }
