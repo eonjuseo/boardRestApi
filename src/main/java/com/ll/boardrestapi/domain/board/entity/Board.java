@@ -1,6 +1,5 @@
-package com.ll.boardrestapi.domain.board;
+package com.ll.boardrestapi.domain.board.entity;
 
-import com.ll.boardrestapi.domain.member.Member;
 import com.ll.boardrestapi.global.jpa.BaseEntity;
 import jakarta.persistence.Entity;
 import lombok.AccessLevel;
@@ -18,6 +17,4 @@ public class Board extends BaseEntity {
 
     private String title;
     private String content;
-
-
 }
