@@ -1,6 +1,6 @@
 package com.ll.boardrestapi.domain.board.entity;
 
-import com.ll.boardrestapi.domain.board.dto.BoardRequest;
+import com.ll.boardrestapi.domain.board.dto.BoardUpdateRequest;
 import com.ll.boardrestapi.global.jpa.BaseEntity;
 import jakarta.persistence.Entity;
 import lombok.AccessLevel;
@@ -19,13 +19,9 @@ public class Board extends BaseEntity {
     private String title;
     private String content;
 
-    public void update(BoardRequest boardRequest) {
-        if (boardRequest.getTitle() != null) {
-            this.title = boardRequest.getTitle();
-        }
-        if (boardRequest.getContent() != null) {
-            this.content = boardRequest.getContent();
-        }
+    public void update(BoardUpdateRequest boardUpdateRequest) {
+        this.content = boardUpdateRequest.getContent();
+        this.title = boardUpdateRequest.getTitle();
     }
 
 }

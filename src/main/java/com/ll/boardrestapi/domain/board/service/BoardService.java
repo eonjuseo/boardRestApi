@@ -3,6 +3,7 @@ package com.ll.boardrestapi.domain.board.service;
 
 import com.ll.boardrestapi.domain.board.dto.BoardRequest;
 import com.ll.boardrestapi.domain.board.dto.BoardResponse;
+import com.ll.boardrestapi.domain.board.dto.BoardUpdateRequest;
 import com.ll.boardrestapi.domain.board.entity.Board;
 import com.ll.boardrestapi.domain.board.repository.BoardRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -30,11 +31,11 @@ public class BoardService {
     }
 
     @Transactional
-    public void updateBoard(long id, BoardRequest boardRequest) {
+    public void updateBoard(long id, BoardUpdateRequest boardUpdateRequest) {
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("게시물을 불러올 수 없습니다."));
 
-        board.update(boardRequest);
+        board.update(boardUpdateRequest);
         boardRepository.save(board);
     }
 
