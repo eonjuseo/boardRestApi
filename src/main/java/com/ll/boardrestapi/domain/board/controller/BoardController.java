@@ -2,6 +2,7 @@ package com.ll.boardrestapi.domain.board.controller;
 
 import com.ll.boardrestapi.domain.board.dto.BoardRequest;
 import com.ll.boardrestapi.domain.board.dto.BoardResponse;
+import com.ll.boardrestapi.domain.board.dto.BoardUpdateRequest;
 import com.ll.boardrestapi.domain.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,27 +18,24 @@ public class BoardController {
 
     @GetMapping("/{id}")
     public ResponseEntity<BoardResponse> readBoard(@PathVariable("id") long id) {
-        return new ResponseEntity<>(boardService.findById(id), HttpStatus.OK);
+        return ResponseEntity.ok(boardService.findById(id));
     }
 
     @PostMapping("/create")
     public ResponseEntity<BoardResponse> createBoard(@RequestBody BoardRequest boardRequest) {
-
-        return new ResponseEntity<>(boardService.createBoard(boardRequest), HttpStatus.OK);
+        return ResponseEntity.ok(boardService.createBoard(boardRequest));
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> updateBoard(@PathVariable("id") long id,
-                                              @RequestBody BoardRequest boardRequest) {
-        boardService.updateBoard(id, boardRequest);
-
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<Void> updateBoard(@PathVariable("id") long id,
+                                              @RequestBody BoardUpdateRequest boardUpdateRequest) {
+        boardService.updateBoard(id, boardUpdateRequest);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteBoard(@PathVariable("id") long id) {
         boardService.deleteBoard(id);
-
-        return new ResponseEntity<>(HttpStatus.OK);
+        return ResponseEntity.ok("게시물이 성공적으로 삭제되었습니다.");
     }
 }
