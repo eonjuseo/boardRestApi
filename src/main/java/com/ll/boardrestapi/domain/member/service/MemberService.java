@@ -39,4 +39,10 @@ public class MemberService {
         member.update(joinRequest);
         memberRepository.save(member);
     }
+
+    @Transactional
+    public void deleteMember(long id) {
+
+        memberRepository.deleteById(id);
+    }
 }
