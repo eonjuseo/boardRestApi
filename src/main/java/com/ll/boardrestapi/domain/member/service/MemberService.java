@@ -45,4 +45,11 @@ public class MemberService {
 
         memberRepository.deleteById(id);
     }
+
+    public List<JoinResponse> findAll() {
+        List<JoinResponse> memberList = new ArrayList<>();
+
+        memberRepository.findAll().forEach(i -> memberList.add(JoinResponse.of(i)));
+        return memberList;
+    }
 }
