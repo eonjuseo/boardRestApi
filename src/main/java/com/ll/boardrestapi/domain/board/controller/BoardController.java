@@ -5,9 +5,10 @@ import com.ll.boardrestapi.domain.board.dto.BoardResponse;
 import com.ll.boardrestapi.domain.board.dto.BoardUpdateRequest;
 import com.ll.boardrestapi.domain.board.service.BoardService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/board")
@@ -37,5 +38,11 @@ public class BoardController {
     public ResponseEntity<String> deleteBoard(@PathVariable("id") long id) {
         boardService.deleteBoard(id);
         return ResponseEntity.ok("게시물이 성공적으로 삭제되었습니다.");
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<BoardResponse>> findAll() {
+        List<BoardResponse> boardList = boardService.findAll();
+        return ResponseEntity.ok(boardList);
     }
 }

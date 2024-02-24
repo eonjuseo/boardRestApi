@@ -11,6 +11,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RequiredArgsConstructor
 @Service
 public class BoardService {
@@ -46,5 +49,12 @@ public class BoardService {
 
         boardRepository.deleteById(id);
 
+    }
+
+    public List<BoardResponse> findAll() {
+        List<BoardResponse> boardList = new ArrayList<>();
+
+        boardRepository.findAll().forEach(i -> boardList.add(BoardResponse.of(i)));
+        return boardList;
     }
 }
