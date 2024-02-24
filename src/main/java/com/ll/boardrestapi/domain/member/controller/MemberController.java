@@ -38,4 +38,10 @@ public class MemberController {
         memberService.deleteMember(id);
         return ResponseEntity.ok("사용자가 성공적으로 삭제되었습니다.");
     }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<JoinResponse>> findAll() {
+        List<JoinResponse> memberList = memberService.findAll();
+        return ResponseEntity.ok(memberList);
+    }
 }
