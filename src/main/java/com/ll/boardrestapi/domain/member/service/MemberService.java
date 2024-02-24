@@ -30,4 +30,13 @@ public class MemberService {
                 .orElseThrow(() -> new EntityNotFoundException("사용자 정보를 불러올 수 없습니다."));
         return JoinResponse.of(member);
     }
+
+    @Transactional
+    public void updateMember(long id, JoinRequest joinRequest) {
+        Member member = memberRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("게시물을 불러올 수 없습니다."));
+
+        member.update(joinRequest);
+        memberRepository.save(member);
+    }
 }
