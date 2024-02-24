@@ -25,4 +25,11 @@ public class MemberController {
     public ResponseEntity<JoinResponse> readMember(@PathVariable("id") long id) {
         return ResponseEntity.ok(memberService.findById(id));
     }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<Void> updateMember(@PathVariable("id") long id,
+                                            @RequestBody JoinRequest joinRequest) {
+        memberService.updateMember(id, joinRequest);
+        return ResponseEntity.ok().build();
+    }
 }
