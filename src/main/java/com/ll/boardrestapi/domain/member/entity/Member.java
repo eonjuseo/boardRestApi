@@ -1,10 +1,9 @@
 package com.ll.boardrestapi.domain.member.entity;
 
+import com.ll.boardrestapi.domain.board.entity.Board;
 import com.ll.boardrestapi.domain.member.dto.JoinRequest;
 import com.ll.boardrestapi.global.jpa.BaseEntity;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,10 +22,17 @@ public class Member extends BaseEntity {
 
     private String name;
 
-//    @OneToMany(mappedBy = "member")
-//    List<Board> boards;
+    @OneToMany(mappedBy = "member")
+    List<Board> boards = new ArrayList<>();
 
     public void update(JoinRequest joinRequest) {
         this.name = joinRequest.getName();
+    }
+
+    @PreRemove
+    private void preRemove() {
+        for (Board board : boards) {
+            board.setMember(null);
+        }
     }
 }
