@@ -1,5 +1,6 @@
 package com.ll.boardrestapi.domain.board.controller;
 
+import com.ll.boardrestapi.domain.board.dto.BoardListResponse;
 import com.ll.boardrestapi.domain.board.dto.BoardRequest;
 import com.ll.boardrestapi.domain.board.dto.BoardResponse;
 import com.ll.boardrestapi.domain.board.dto.BoardUpdateRequest;
@@ -40,9 +41,15 @@ public class BoardController {
         return ResponseEntity.ok("게시물이 성공적으로 삭제되었습니다.");
     }
 
+//    @GetMapping("/list")
+//    public ResponseEntity<List<BoardResponse>> findAll() {
+//        List<BoardResponse> boardList = boardService.findAll();
+//        return ResponseEntity.ok(boardList);
+//    }
+
     @GetMapping("/list")
-    public ResponseEntity<List<BoardResponse>> findAll() {
-        List<BoardResponse> boardList = boardService.findAll();
+    public ResponseEntity<List<BoardListResponse>> findByStatus() {
+        List<BoardListResponse> boardList = boardService.findByStatus();
         return ResponseEntity.ok(boardList);
     }
 }
