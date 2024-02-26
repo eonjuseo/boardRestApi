@@ -11,6 +11,8 @@ import com.ll.boardrestapi.domain.board.repository.BoardRepository;
 import com.ll.boardrestapi.domain.member.dto.JoinRequest;
 import com.ll.boardrestapi.domain.member.entity.Member;
 import com.ll.boardrestapi.domain.member.repository.MemberRepository;
+import com.ll.boardrestapi.global.exception.CustomException;
+import com.ll.boardrestapi.global.exception.status.ExceptionStatus;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,7 @@ public class BoardService {
 
     public BoardResponse findById(Long id) {
         Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("게시물을 불러올 수 없습니다."));
+                .orElseThrow(() -> new  CustomException(ExceptionStatus.POST_IS_EMPTY));
         return BoardResponse.of(board);
     }
 
@@ -44,7 +46,7 @@ public class BoardService {
     @Transactional
     public void updateBoard(long id, BoardUpdateRequest boardUpdateRequest) {
         Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("게시물을 불러올 수 없습니다."));
+                .orElseThrow(() -> new CustomException(ExceptionStatus.POST_IS_EMPTY));
 
         board.update(boardUpdateRequest);
         boardRepository.save(board);
