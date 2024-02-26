@@ -12,23 +12,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("/board")
+@RequestMapping("/boards")
 @RestController
 public class BoardController {
 
     private final BoardService boardService;
+
+    @PostMapping
+    public ResponseEntity<BoardResponse> createBoard(@RequestBody BoardRequest boardRequest) {
+        return ResponseEntity.ok(boardService.createBoard(boardRequest));
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<BoardResponse> readBoard(@PathVariable("id") long id) {
         return ResponseEntity.ok(boardService.findById(id));
     }
 
-    @PostMapping("/create")
-    public ResponseEntity<BoardResponse> createBoard(@RequestBody BoardRequest boardRequest) {
-        return ResponseEntity.ok(boardService.createBoard(boardRequest));
-    }
-
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Void> updateBoard(@PathVariable("id") long id,
                                               @RequestBody BoardUpdateRequest boardUpdateRequest) {
         boardService.updateBoard(id, boardUpdateRequest);
@@ -41,13 +41,13 @@ public class BoardController {
         return ResponseEntity.ok("게시물이 성공적으로 삭제되었습니다.");
     }
 
-//    @GetMapping("/list")
+//    @GetMapping
 //    public ResponseEntity<List<BoardResponse>> findAll() {
 //        List<BoardResponse> boardList = boardService.findAll();
 //        return ResponseEntity.ok(boardList);
 //    }
 
-    @GetMapping("/list")
+    @GetMapping
     public ResponseEntity<List<BoardListResponse>> findByStatus() {
         List<BoardListResponse> boardList = boardService.findByStatus();
         return ResponseEntity.ok(boardList);
