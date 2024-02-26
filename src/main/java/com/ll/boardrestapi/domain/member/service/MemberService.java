@@ -4,10 +4,13 @@ import com.ll.boardrestapi.domain.member.dto.JoinRequest;
 import com.ll.boardrestapi.domain.member.dto.JoinResponse;
 import com.ll.boardrestapi.domain.member.entity.Member;
 import com.ll.boardrestapi.domain.member.repository.MemberRepository;
+import com.ll.boardrestapi.global.exception.CustomException;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import com.ll.boardrestapi.global.exception.status.ExceptionStatus;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +30,14 @@ public class MemberService {
 
     public JoinResponse findById(Long id) {
         Member member = memberRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("사용자 정보를 불러올 수 없습니다."));
+                .orElseThrow(() -> new CustomException(ExceptionStatus.USER_IS_NOT_EXIST));
         return JoinResponse.of(member);
     }
 
     @Transactional
     public void updateMember(long id, JoinRequest joinRequest) {
         Member member = memberRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("사용자 정보를 불러올 수 없습니다."));
+                .orElseThrow(() -> new CustomException(ExceptionStatus.USER_IS_NOT_EXIST));
 
         member.update(joinRequest);
         memberRepository.save(member);
@@ -42,7 +45,6 @@ public class MemberService {
 
     @Transactional
     public void deleteMember(long id) {
-
         memberRepository.deleteById(id);
     }
 
