@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RequiredArgsConstructor
-@RequestMapping("/member")
+@RequestMapping("/members")
 @RestController
 public class MemberController {
 
     private final MemberService memberService;
 
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<JoinResponse> createMember(@RequestBody JoinRequest joinRequest) {
         return ResponseEntity.ok(memberService.createMember(joinRequest));
     }
@@ -26,7 +26,7 @@ public class MemberController {
         return ResponseEntity.ok(memberService.findById(id));
     }
 
-    @PutMapping("/update/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<Void> updateMember(@PathVariable("id") long id,
                                             @RequestBody JoinRequest joinRequest) {
         memberService.updateMember(id, joinRequest);
@@ -39,7 +39,7 @@ public class MemberController {
         return ResponseEntity.ok("사용자가 성공적으로 삭제되었습니다.");
     }
 
-    @GetMapping("/list")
+    @GetMapping
     public ResponseEntity<List<JoinResponse>> findAll() {
         List<JoinResponse> memberList = memberService.findAll();
         return ResponseEntity.ok(memberList);
