@@ -30,7 +30,11 @@ public class BoardService {
 
     public BoardResponse findById(Long id) {
         Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new  CustomException(ExceptionStatus.POST_IS_EMPTY));
+                .orElseThrow(() -> new CustomException(ExceptionStatus.NOT_FOUND_POST));
+
+        if(BoardStatus.DISABLE.equals(board.getBoardStatus())) {
+            throw new CustomException(ExceptionStatus.FORBIDDEN_POST);
+        }
         return BoardResponse.of(board);
     }
 
@@ -46,7 +50,7 @@ public class BoardService {
     @Transactional
     public void updateBoard(long id, BoardUpdateRequest boardUpdateRequest) {
         Board board = boardRepository.findById(id)
-                .orElseThrow(() -> new CustomException(ExceptionStatus.POST_IS_EMPTY));
+                .orElseThrow(() -> new CustomException(ExceptionStatus.NOT_FOUND_POST));
 
         board.update(boardUpdateRequest);
         boardRepository.save(board);

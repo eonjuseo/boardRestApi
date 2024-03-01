@@ -30,14 +30,14 @@ public class MemberService {
 
     public JoinResponse findById(Long id) {
         Member member = memberRepository.findById(id)
-                .orElseThrow(() -> new CustomException(ExceptionStatus.USER_IS_NOT_EXIST));
+                .orElseThrow(() -> new CustomException(ExceptionStatus.NOT_FOUND_USER));
         return JoinResponse.of(member);
     }
 
     @Transactional
     public void updateMember(long id, JoinRequest joinRequest) {
         Member member = memberRepository.findById(id)
-                .orElseThrow(() -> new CustomException(ExceptionStatus.USER_IS_NOT_EXIST));
+                .orElseThrow(() -> new CustomException(ExceptionStatus.NOT_FOUND_USER));
 
         member.update(joinRequest);
         memberRepository.save(member);
