@@ -12,6 +12,7 @@ import com.ll.boardrestapi.domain.member.dto.JoinRequest;
 import com.ll.boardrestapi.domain.member.entity.Member;
 import com.ll.boardrestapi.domain.member.repository.MemberRepository;
 import com.ll.boardrestapi.global.exception.CustomException;
+import com.ll.boardrestapi.global.exception.dto.ErrorResponse;
 import com.ll.boardrestapi.global.exception.status.ExceptionStatus;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -48,16 +49,20 @@ public class BoardService {
     }
 
     @Transactional
-    public void updateBoard(long id, BoardUpdateRequest boardUpdateRequest) {
+    public BoardResponse updateBoard(long id, BoardUpdateRequest boardUpdateRequest) {
         Board board = boardRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ExceptionStatus.NOT_FOUND_POST));
 
         board.update(boardUpdateRequest);
         boardRepository.save(board);
+
+        return BoardResponse.of(board);
     }
 
     @Transactional
     public void deleteBoard(long id) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ExceptionStatus.NOT_FOUND_POST));
 
         boardRepository.deleteById(id);
     }
