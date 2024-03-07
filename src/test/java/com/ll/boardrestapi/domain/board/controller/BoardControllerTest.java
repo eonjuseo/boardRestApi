@@ -32,7 +32,7 @@ public class BoardControllerTest {
 
 
 
-
+2차수정
 
     
     @Autowired
