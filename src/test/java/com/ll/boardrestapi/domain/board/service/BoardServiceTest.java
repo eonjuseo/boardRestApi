@@ -9,18 +9,14 @@ import com.ll.boardrestapi.domain.board.entity.BoardStatus;
 import com.ll.boardrestapi.domain.board.repository.BoardRepository;
 import com.ll.boardrestapi.domain.member.entity.Member;
 import com.ll.boardrestapi.global.exception.CustomException;
-import com.ll.boardrestapi.global.exception.dto.ErrorResponse;
 import com.ll.boardrestapi.global.exception.status.ExceptionStatus;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
