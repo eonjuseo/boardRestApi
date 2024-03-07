@@ -29,6 +29,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 @SpringBootTest
 public class BoardControllerTest {
+
+
+
+
+
+    
     @Autowired
     private MockMvc mvc;
 
