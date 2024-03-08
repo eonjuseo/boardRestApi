@@ -15,7 +15,7 @@ import static com.ll.boardrestapi.domain.board.entity.BoardStatus.ENABLE;
 @NoArgsConstructor
 @AllArgsConstructor
 public class BoardResponse {
-    private long id;
+    private Long id;
     private String title;
     private String content;
     private BoardStatus boardStatus;

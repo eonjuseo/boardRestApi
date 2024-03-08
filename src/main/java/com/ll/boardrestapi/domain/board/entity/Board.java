@@ -12,7 +12,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @Setter
-@SuperBuilder
+@SuperBuilder(toBuilder = true) // 해당 객체 기반 새로운 빌더 인스턴스 생성 가능
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -26,7 +26,7 @@ public class Board extends BaseEntity {
     private BoardStatus boardStatus;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
+    @JoinColumn(name = "member_id", foreignKey = @ForeignKey(value = ConstraintMode.NO_CONSTRAINT))
     //@JsonIgnoreProperties("boards") // 순환 참조 방지 설정
     private Member member;
 

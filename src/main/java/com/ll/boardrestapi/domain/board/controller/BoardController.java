@@ -29,7 +29,7 @@ public class BoardController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> updateBoard(@PathVariable("id") long id,
+    public ResponseEntity<BoardResponse> updateBoard(@PathVariable("id") long id,
                                               @RequestBody BoardUpdateRequest boardUpdateRequest) {
         boardService.updateBoard(id, boardUpdateRequest);
         return ResponseEntity.ok().build();

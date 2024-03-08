@@ -4,17 +4,14 @@ import com.ll.boardrestapi.domain.board.entity.Board;
 import com.ll.boardrestapi.domain.member.dto.JoinRequest;
 import com.ll.boardrestapi.global.jpa.BaseEntity;
 import jakarta.persistence.*;
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-@SuperBuilder
+@SuperBuilder(toBuilder = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -22,6 +19,7 @@ public class Member extends BaseEntity {
 
     private String name;
 
+    @Builder.Default
     @OneToMany(mappedBy = "member")
     List<Board> boards = new ArrayList<>();
 
