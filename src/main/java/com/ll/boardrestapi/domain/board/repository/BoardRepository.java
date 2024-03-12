@@ -8,7 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface BoardRepository extends JpaRepository<Board, Long> {
 
@@ -18,5 +17,4 @@ public interface BoardRepository extends JpaRepository<Board, Long> {
 //    List<Board> findByBoardStatus(@Param("boardStatus") BoardStatus boardStatus);
 
     List<Board> findByBoardStatus(BoardStatus boardStatus);
-    Optional<Board>  findByIdAndBoardStatus(Long id, BoardStatus boardStatus);
 }

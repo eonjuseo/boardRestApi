@@ -39,7 +39,6 @@ public class MemberController {
         return ResponseEntity.ok("사용자가 성공적으로 삭제되었습니다.");
     }
 
-    //memberId가 null 일 경우 불러오지 못함
     @GetMapping
     public ResponseEntity<List<JoinResponse>> findAll() {
         List<JoinResponse> memberList = memberService.findAll();
